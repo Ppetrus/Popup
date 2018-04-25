@@ -1,0 +1,60 @@
+.my_popup {
+    position: absolute;
+    margin-left : 10%;
+    margin-right : 10%;
+    margin-top : 10%;
+    padding: 5px;
+    
+    z-index: 1;
+    
+    border: 4px solid #737373;
+    background-color: #BBBBBB;
+}
+
+.my_popup .my_popup_close {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    font-size: 150%;
+    
+}
+
+.my_popup .my_popup_description {
+    display: inline-block;
+    position: relative;
+    
+    vertical-align:top;
+    
+    width:45%;
+    height:100px;
+    
+    left : 1%;
+    padding: 5px;
+    
+    border: 4px solid #838383;
+    background-color: #F5F5F5;
+}
+
+.my_popup .my_popup_information {
+    display: inline-block;
+    position: relative;
+    
+    vertical-align:top;
+    
+    width:45%;
+    height:100px;
+    
+    left : 4%;
+    padding: 5px;
+    
+    border: 4px solid #838383;
+    background-color: #F5F5F5;
+}
+
+.my_popup .my_popup_title {
+    margin-top:0;
+    padding-bottom: 5px;
+    text-align: center;
+    border-bottom : 1px solid #000000;
+    vertical-align: top;
+}

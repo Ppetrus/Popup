@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>demo</title>
+        <meta charset="utf-8">
+        <script type="text/javascript" src="src/popup.js"></script>
+        <link rel="stylesheet" href="css/popup.css">
+    </head>
+    
+    <body>
+        <button class="my_popu" onclick='popupCreate(document.body, "my_popup");'>créer une popup</button>
+        <script> 
+            var b = new Box("toto", 2,
+                            {deletable: true,  // 🗑
+                             resetable: true,  // 🗘 ♻ ♺
+                             expandable: true, // 🔍
+                             initialValue: "not yet", // usable by encode to reset
+                             onPrinter: "expanded" | "reduced" | "asDisplayed"
+                             /*,
+                             encode: function, // Get user choices
+                             decode: function, // Set user choices
+                             onExpand: function,
+                             onReduce: function,
+                             onDelete: function,
+                             onReset: function*/
+                             }) ;
+            /*                 
+            b.setID('1') ;
+            b.setContent('the content') ;
+            b.setStatus('ok' | 'normal' | 'warning' | 'error' | 'disabled' | 'running') ;
+            b.expand() ;
+            b.reduce() ;
+            b.delete() ;
+            b.reset() ;
+            b.IDNode ;
+            b.resumeNode ;
+            b.contentNode ;
+            */
+        </script>
+    </body>
+</html>
