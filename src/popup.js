@@ -1,0 +1,1 @@
+// This file will contains the functions to create the elements of a popup.
