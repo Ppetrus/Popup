@@ -8,14 +8,34 @@
     </head>
     
     <body>
-        <button class="my_popu" onclick='popupCreate(document.body, "my_popup");'>créer une popup</button>
-        <script> 
-            var b = new Box("toto", 2,
-                            {deletable: true,  // 🗑
-                             resetable: true,  // 🗘 ♻ ♺
-                             expandable: true, // 🔍
+        <button class="my_popu" onclick='popupCreate(document.body, "my_popup");'>créer une popup ⚠</button>
+        <script>
+            var c = new Boxes(document.body, "my_popup1",{movable: false, resizable: false, 
+                        closable: false, resetable: false, margin: "5% 5% 5% 5%;", border: "4px solid #636363;", backgroundColor: "#BBBBBB;"
+                               // 🗘 ♻ ♺ keepValues: "never" | "page" | "always",
+                        });
+            c.setTitle('Exporter la colonne "TP_1" vers un tableur.');
+            c.setDescription("L'objectif de cette popup est de faire pleins de trucs parce que c'est vraiment cool en de fait de faire des trucs avec des grosses description.");
+            c.setInformation("Il n'y a pas d'erreur. Il n'y a pas d'erreur. Il n'y a pas d'erreur. Il n'y a pas d'erreur. Il n'y a pas d'erreur. ");
+            /*c.titleNode ;
+            json = c.encode() ; // Get user choices
+            c.decode(json) ; // Initialise choices*/
+            c.addBox("titi1",1, {margin: "1% 0% 0% 1%;", border: "4px solid #454545;", backgroundColor: "#F5F5F5;"});
+            c.addBox("titi2",2, {margin: "1% 0% 0% 1%;", border: "4px solid #454545;", backgroundColor: "#F5F5F5;"});
+            c.addBox("titi3",3, {margin: "1% 0% 0% 1%;", border: "4px solid #454545;", backgroundColor: "#F5F5F5;"});
+            c.addBox("titi4",4, {margin: "1% 0% 0% 1%;", border: "4px solid #454545;", backgroundColor: "#F5F5F5;"});
+            c.addBox("titi5",5, {margin: "1% 0% 0% 1%;", border: "4px solid #454545;", backgroundColor: "#F5F5F5;"});
+            
+            
+        
+            // On start, the first box is expanded.
+            // Given parameter overwrote default in the object (same name)
+            /*var b = new Box(document.body, "my_box", 2,
+                            {deletable: true,  // ðŸ—‘
+                             resetable: true,  // ðŸ—˜ â™» â™º
+                             expandable: true, // ðŸ”
                              initialValue: "not yet", // usable by encode to reset
-                             onPrinter: "expanded" | "reduced" | "asDisplayed"
+                             onPrinter: "expanded" | "reduced" | "asDisplayed"*/
                              /*,
                              encode: function, // Get user choices
                              decode: function, // Set user choices
@@ -23,7 +43,7 @@
                              onReduce: function,
                              onDelete: function,
                              onReset: function*/
-                             }) ;
+                             //}) ;
             /*                 
             b.setID('1') ;
             b.setContent('the content') ;

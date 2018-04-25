@@ -4,9 +4,15 @@ class Boxes {
     constructor(parentNode, uniqueID, options) {
         this.parentNode = parentNode;
         this.id = uniqueID;
+        this.box = [];
+        this.numberBox = 0;
         var description = options.description;
         var information = options.information;
         var title = options.title;
+        var margin = options.margin;
+        var border = options.border;
+        var backgroundColor = options.backgroundColor;
+        
         if (options.description === undefined) {
             description = "No description yet.";
         }
@@ -33,7 +39,7 @@ class Boxes {
         this.setTitle(title);
         this.setDescription(description);
         this.setInformation(information);
-        
+        this.setStyle(margin, border, backgroundColor);
     }
     
     drawCloseButton() {
@@ -52,11 +58,11 @@ class Boxes {
         var old_popup_description = document.getElementById(this.id+ "_description");
         // We delete the old popup description before show up a new one.
         if (old_popup_description) {
-            old_popup_description.innerHTML = newDescription;
+            old_popup_description.innerHTML = '<p class="my_description_icon">&#9432;</p> <p class="my_popup_text">' + newDescription + '</p>';
         } else {
             var popupDesc = document.createElement('div');
             popupDesc.className="my_popup_description";  
-            popupDesc.innerHTML= newDescription;
+            popupDesc.innerHTML= '<p class="my_description_icon">&#9432;</p> <p class="my_popup_text">' + newDescription + '</p>';
             popupDesc.id = this.id + "_description";
             this.popup.appendChild(popupDesc);
         }
@@ -66,12 +72,16 @@ class Boxes {
         var old_popup_information = document.getElementById(this.id+ "_information");
         // We delete the old popup information before show up a new one.
         if (old_popup_information) {
-            old_popup_information.innerHTML = newInformation;
+            old_popup_information.innerHTML = '<p class="my_warning_icon">⚠</p> <p class="my_popup_text">' + newInformation + '</p>';
         } else {
+            var infoText = document.createElement("p");
+            infoText.innerHTML = "⚠";
+            
             var popupInfo = document.createElement('div');
             popupInfo.className="my_popup_information";  
-            popupInfo.innerHTML= newInformation;
+            popupInfo.innerHTML= '<p class="my_warning_icon">⚠</p> <p class="my_popup_text">' + newInformation + '</p>';
             popupInfo.id = this.id + "_information";
+            popupInfo.appendChild(infoText);
             this.popup.appendChild(popupInfo);
         }
     }
@@ -90,6 +100,14 @@ class Boxes {
         }
     }
 
+    setStyle(margin, border, backgroundColor) {
+        this.popup.setAttribute("style", "margin:" + margin + "border:" + border + "background-color:" + backgroundColor);
+    }
+    
+    addBox(uniqueID, number, options) {
+        this.box.push(new Box(this.popup, uniqueID, number, options));
+    }
+    
     close() {
         // element_focused = undefined ;
         var popup = document.getElementById(this.id);
@@ -100,39 +118,62 @@ class Boxes {
 }
 
 class Box {
-    constructor(parentNode, uniqueID, options) {
+    constructor(parentNode, uniqueID, number, options) {
         this.parentNode = parentNode;
         this.id = uniqueID;
+        
+        var description = options.description;
+        var information = options.information;
+        var number = number;
+        var margin = options.margin;
+        var border = options.border;
+        var backgroundColor = options.backgroundColor;
+        
+        if (options.description === undefined) {
+            description = "No description yet.";
+        }
+        if (options.information === undefined) {
+            information = "No information yet.";
+        }
+        
+        var old_popup = document.getElementById(this.id);
+        // We delete the old box before show up a new one.
+        if (old_popup) {
+            old_popup.parentNode.removeChild(old_popup);
+        }
+        
+        // Create a div containing the box and add it on the  
+        this.box = document.createElement('div');
+        this.box.className="my_box";  
+        this.box.id = this.id;
+        this.parentNode.appendChild(this.box);
+        
+        // this.drawCloseButton();
+        this.setNumber(number);
+        /*
+        this.setDescription(description);
+        this.setInformation(information);*/
+        this.setStyle(margin, border, backgroundColor);
+        
     }
-}
-
-function popupCreate(parentNode, uniqueID) {
-    // On start, the first box is expanded.
-    // Given parameter overwrote default in the object (same name)
-
-    var c = new Boxes(parentNode, uniqueID,{movable: false, resizable: false, closable: false,
-                       resetable: false,
-                       margin: [0,0,0,0] | 0, // 0% == full screen
-                       //border: style, background: style
-                       // 🗘 ♻ ♺ keepValues: "never" | "page" | "always",
-                       });
-    c.setTitle('Exporter la colonne "TP_1" vers un tableur.');
-    c.setDescription("L'objectif de cette popup est de faire pleins de trucs parce que c'est vraiment cool en de fait de faire des trucs avec des grosses description.");
-    c.setInformation("Il n'y a pas d'erreur.");
-    /*c.titleNode ;
-    json = c.encode() ; // Get user choices
-    c.decode(json) ; // Initialise choices
-    c.close() ;*/
-}
-
-
-function sleep(milliseconds) {
-  var start = new Date().getTime();
-  for (var i = 0; i < 1e7; i++) {
-    if ((new Date().getTime() - start) > milliseconds){
-      break;
+    
+    setStyle(margin, border, backgroundColor) {
+        this.box.setAttribute("style", "margin:" + margin + "border:" + border + "background-color:" + backgroundColor);
     }
-  }
+    
+    setNumber(newNumber) {
+        var old_box_number = document.getElementById(this.id+ "_number");
+        // We delete the old box title before show up a new one.
+        if (old_box_number) {
+            old_box_number.innerHTML = newNumber;
+        } else {
+            var boxNumber = document.createElement('div');
+            boxNumber.className="my_box_number";  
+            boxNumber.innerHTML= newNumber;
+            boxNumber.id = this.id + "_number";
+            this.box.appendChild(boxNumber);
+        }
+    }
 }
 
 
